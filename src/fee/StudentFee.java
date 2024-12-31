@@ -42,11 +42,13 @@ public class StudentFee
       try {
         Connection con = DBConnect.connect();
 //        to fetch all the roll numbers
-        PreparedStatement ps = con.prepareStatement("select * from studata");
+        PreparedStatement ps = con.prepareStatement("select * from studata",ResultSet.TYPE_SCROLL_SENSITIVE, 
+                        ResultSet.CONCUR_UPDATABLE);
         ResultSet rs = ps.executeQuery();
 //        to fetch all the students who had submitted their full fee
         PreparedStatement ps2 = con.prepareStatement("select * from studfee where " +
-                "status='done' and year=?");
+                "status='done' and year=?",ResultSet.TYPE_SCROLL_SENSITIVE, 
+                        ResultSet.CONCUR_UPDATABLE);
         
         ps2.setString(1,t5.getSelectedItem().toString());
      
@@ -65,11 +67,11 @@ eg :        roll no    --   4   status -> done   ... these records came from stu
 */
         while (rs.next()) {
             String studentRollNo = rs.getString("rollno");
-            System.out.println(studentRollNo+"..");
+//            System.out.println(studentRollNo+"..");
 //            beforeFirst() is used to reset the cursor to next row 
             rs2.beforeFirst();
             while (rs2.next()) {
-                            System.out.println(rs2.getString("rollno")+"..||..");
+//                            System.out.println(rs2.getString("rollno")+"..||..");
 
                     if (rs2.getString("rollno").equalsIgnoreCase(studentRollNo) ) {
                     flag = 1;
@@ -139,6 +141,11 @@ eg :        roll no    --   4   status -> done   ... these records came from stu
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Cancel");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 153, 102));
@@ -350,6 +357,7 @@ eg :        roll no    --   4   status -> done   ... these records came from stu
 
             }
             else{
+                
                 PreparedStatement p2 = con.prepareStatement("update studfee set fee = ? , status = ? where rollno=? ");
        
                 p2.setString(1,String.valueOf(pend));
@@ -435,6 +443,10 @@ eg :        roll no    --   4   status -> done   ... these records came from stu
     private void t5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t5ActionPerformed
        fetchStud();
     }//GEN-LAST:event_t5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     
     public static void main(String args[]) {

@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
+import student.*;
+import event.*;
+import attendence.*;
+import fee.*;
+import result.*;
 import student.StudentBoard;
 import studentmanagement.DBConnect;
 
@@ -48,6 +53,45 @@ public class DashBoard1
             PreparedStatement ps = con.prepareStatement("select * from event");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
+               String sno1 = String.valueOf(sno);
+               String date = rs.getString("date");
+               String name1 = rs.getString("name");
+                    
+                String tbData[] ={sno1,date,name1};
+                DefaultTableModel tb1Model=(DefaultTableModel)jTable1.getModel();
+                tb1Model.addRow(tbData);
+                sno++;
+            }
+               }catch(Exception e){}
+          
+        }
+        
+        
+         public DashBoard1(String name){
+             initComponents();
+        setLocationRelativeTo(null);
+        l1.setText("Hello Admin , "+name);
+         val1 = val2 = val3 = val4 = val5 = val6 = true;
+        studPanel.setVisible(false);
+        resPanel.setVisible(false);
+        feePanel.setVisible(false);
+        evePanel.setVisible(false);
+        attPanel.setVisible(false);
+        utiPanel.setVisible(false);
+         try{
+            Connection con = DBConnect.connect();
+            PreparedStatement ps = con.prepareStatement("select count(rollno) from studata");
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+            s1.setText("<html>STUDENTS<sub>("+rs.getString(1)+")</sub></html>");
+            }
+               }catch(Exception e){}
+        
+          try{
+            Connection con = DBConnect.connect();
+            PreparedStatement ps = con.prepareStatement("select * from event");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
 //                difference between String.valueOf() and .toString();
 //                 is there only one way to print ?
                String sno1 = String.valueOf(sno);
@@ -62,38 +106,7 @@ public class DashBoard1
                }catch(Exception e){}
           
         }
-    public DashBoard1(String name) {
-        initComponents();
-        setLocationRelativeTo(null);
-        l1.setText("Hello Admin , "+name);
-         val1 = val2 = val3 = val4 = val5 = val6 = true;
-        studPanel.setVisible(false);
-        resPanel.setVisible(false);
-        feePanel.setVisible(false);
-        evePanel.setVisible(false);
-        attPanel.setVisible(false);
-        utiPanel.setVisible(false);
-        
-          try{
-            Connection con = DBConnect.connect();
-            PreparedStatement ps = con.prepareStatement("select * from event");
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-               String sno1 = String.valueOf(sno);
-               String date = rs.getString("date");
-               String name1 = rs.getString("name");
-                    
-                String tbData[] ={sno1,date,name1};
-                DefaultTableModel tb1Model=(DefaultTableModel)jTable1.getModel();
-                tb1Model.addRow(tbData);
-                sno++;
-            }
-            
-        }catch(Exception e){}
-
-        
-        
-    }
+       
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,7 +120,7 @@ public class DashBoard1
         jPanel1 = new javax.swing.JPanel();
         sideBarPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         dashBtn = new javax.swing.JButton();
         studBtn = new javax.swing.JButton();
         studPanel = new javax.swing.JPanel();
@@ -157,8 +170,8 @@ public class DashBoard1
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(21, 141, 70), 2));
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        jPanel2.setBackground(new java.awt.Color(21, 117, 70));
-        jPanel2.setForeground(new java.awt.Color(230, 230, 230));
+        jPanel4.setBackground(new java.awt.Color(21, 117, 70));
+        jPanel4.setForeground(new java.awt.Color(230, 230, 230));
 
         dashBtn.setBackground(new java.awt.Color(21, 117, 70));
         dashBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -184,18 +197,33 @@ public class DashBoard1
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Delete Student");
         jButton3.setBorder(null);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(21, 141, 70));
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Update Students");
         jButton4.setBorder(null);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setBackground(new java.awt.Color(21, 141, 70));
         jButton5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("View Details");
         jButton5.setBorder(null);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setBackground(new java.awt.Color(21, 141, 70));
         jButton6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -253,12 +281,22 @@ public class DashBoard1
         jButton10.setForeground(new java.awt.Color(255, 255, 255));
         jButton10.setText("Update Event");
         jButton10.setBorder(null);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton11.setBackground(new java.awt.Color(21, 141, 70));
         jButton11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton11.setForeground(new java.awt.Color(255, 255, 255));
         jButton11.setText("Add Event");
         jButton11.setBorder(null);
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout evePanelLayout = new javax.swing.GroupLayout(evePanel);
         evePanel.setLayout(evePanelLayout);
@@ -299,12 +337,22 @@ public class DashBoard1
         jButton13.setForeground(new java.awt.Color(255, 255, 255));
         jButton13.setText("Student Fee");
         jButton13.setBorder(null);
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jButton14.setBackground(new java.awt.Color(21, 141, 70));
         jButton14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton14.setForeground(new java.awt.Color(255, 255, 255));
         jButton14.setText("Fee Structure");
         jButton14.setBorder(null);
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout feePanelLayout = new javax.swing.GroupLayout(feePanel);
         feePanel.setLayout(feePanelLayout);
@@ -345,12 +393,22 @@ public class DashBoard1
         jButton15.setForeground(new java.awt.Color(255, 255, 255));
         jButton15.setText("View Attendence");
         jButton15.setBorder(null);
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         jButton16.setBackground(new java.awt.Color(21, 141, 70));
         jButton16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton16.setForeground(new java.awt.Color(255, 255, 255));
         jButton16.setText("Mark Attendence");
         jButton16.setBorder(null);
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout attPanelLayout = new javax.swing.GroupLayout(attPanel);
         attPanel.setLayout(attPanelLayout);
@@ -391,12 +449,22 @@ public class DashBoard1
         jButton19.setForeground(new java.awt.Color(255, 255, 255));
         jButton19.setText("Generate Result");
         jButton19.setBorder(null);
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
 
         jButton20.setBackground(new java.awt.Color(21, 141, 70));
         jButton20.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton20.setForeground(new java.awt.Color(255, 255, 255));
         jButton20.setText("Enter Result");
         jButton20.setBorder(null);
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout resPanelLayout = new javax.swing.GroupLayout(resPanel);
         resPanel.setLayout(resPanelLayout);
@@ -437,18 +505,33 @@ public class DashBoard1
         jButton23.setForeground(new java.awt.Color(255, 255, 255));
         jButton23.setText("Web Browser");
         jButton23.setBorder(null);
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
 
         jButton24.setBackground(new java.awt.Color(21, 141, 70));
         jButton24.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton24.setForeground(new java.awt.Color(255, 255, 255));
         jButton24.setText("Calculator");
         jButton24.setBorder(null);
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
 
         jButton25.setBackground(new java.awt.Color(21, 141, 70));
         jButton25.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton25.setForeground(new java.awt.Color(255, 255, 255));
         jButton25.setText("Notepad");
         jButton25.setBorder(null);
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout utiPanelLayout = new javax.swing.GroupLayout(utiPanel);
         utiPanel.setLayout(utiPanelLayout);
@@ -496,13 +579,13 @@ public class DashBoard1
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dashBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(studBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                     .addComponent(studPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -520,9 +603,9 @@ public class DashBoard1
                     .addComponent(exitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(dashBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -556,7 +639,7 @@ public class DashBoard1
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setViewportView(jPanel2);
+        jScrollPane1.setViewportView(jPanel4);
 
         jButton7.setBackground(new java.awt.Color(21, 117, 70));
         jButton7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -636,6 +719,11 @@ public class DashBoard1
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("ATTENDENCE");
         jLabel4.setOpaque(true);
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         jButton8.setBackground(new java.awt.Color(21, 117, 70));
         jButton8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -714,52 +802,123 @@ public class DashBoard1
        dispose();
     }//GEN-LAST:event_s1MouseClicked
 
-    private void studBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studBtnActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
-        studPanel.setVisible(val1);
-        val1 = !val1;
-    }//GEN-LAST:event_studBtnActionPerformed
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+     
+    }//GEN-LAST:event_jLabel4MouseClicked
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void attBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attBtnActionPerformed
-        attPanel.setVisible(val4);
-        val4 = !val4;
-    }//GEN-LAST:event_attBtnActionPerformed
-
-    private void resBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resBtnActionPerformed
-        resPanel.setVisible(val2);
-        val2 = !val2;
-    }//GEN-LAST:event_resBtnActionPerformed
-
-    private void feeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_feeBtnActionPerformed
-        feePanel.setVisible(val3);
-        val3 = !val3;
-    }//GEN-LAST:event_feeBtnActionPerformed
-
-    private void eveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eveBtnActionPerformed
-        evePanel.setVisible(val5);
-        val5 = !val5;
-    }//GEN-LAST:event_eveBtnActionPerformed
-
-    private void abtBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abtBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_abtBtnActionPerformed
+    }//GEN-LAST:event_exitBtnActionPerformed
 
     private void utiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utiBtnActionPerformed
         utiPanel.setVisible(val6);
         val6 = !val6;
     }//GEN-LAST:event_utiBtnActionPerformed
 
-    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_exitBtnActionPerformed
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        try {
+            Runtime.getRuntime().exec("notepad.exe");
+        } catch (Exception e) {}
+    }//GEN-LAST:event_jButton25ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        dispose();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        try {
+            Runtime.getRuntime().exec("calc.exe");
+        } catch (Exception e) {}
+    }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        try {
+            String chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+            Runtime.getRuntime().exec(chromePath);
+
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void abtBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abtBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_abtBtnActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        new EnterResult().setVisible(true);
+    }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        new GenerateResult().setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void eveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eveBtnActionPerformed
+        evePanel.setVisible(val5);
+        val5 = !val5;
+    }//GEN-LAST:event_eveBtnActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        new MarkAttend().setVisible(true);
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        new ViewAttend().setVisible(true);
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void feeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_feeBtnActionPerformed
+        feePanel.setVisible(val3);
+        val3 = !val3;
+    }//GEN-LAST:event_feeBtnActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        new FeeStructure().setVisible(true);
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        new StudentFee().setVisible(true);
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void resBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resBtnActionPerformed
+        resPanel.setVisible(val2);
+        val2 = !val2;
+    }//GEN-LAST:event_resBtnActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        new AddEvent().setVisible(true);
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        new EditEvent().setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void attBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attBtnActionPerformed
+        attPanel.setVisible(val4);
+        val4 = !val4;
+    }//GEN-LAST:event_attBtnActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        new AddStudent().setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        new ViewStudent().setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        new UpdateStudent().setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        new DeleteStudent().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void studBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studBtnActionPerformed
+
+        studPanel.setVisible(val1);
+        val1 = !val1;
+    }//GEN-LAST:event_studBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -838,8 +997,8 @@ public class DashBoard1
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

@@ -2,22 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/result/EnterResult.java</file>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/dashboard/DashBoard1.java</file>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/result/GenerateResult.java</file>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/student/DeleteStudent.java</file>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/fee/StudentFee.java</file>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/fee/FeeBoard.java</file>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/attendence/ViewAttend.java</file>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/fee/FeeStructure.java</file>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/student/ViewStudent.java</file>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/fee/FeeForm.java</file>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/event/EditEvent.java</file>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/attendence/MarkAttend.java</file>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/dashboard/sb.java</file>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/attendence/AttendBoard.java</file>
-            <file>file:/D:/01_JAVA%20COFFEE/PR_TRY/StudentManagement/src/event/AddEvent.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

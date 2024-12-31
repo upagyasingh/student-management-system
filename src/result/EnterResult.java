@@ -148,7 +148,7 @@ public class EnterResult
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Search By :");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 120, 40));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 120, 40));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 153));
@@ -176,7 +176,7 @@ public class EnterResult
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 470, 130, 50));
 
         jLabel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 4), "ENTER  RESULT", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 24), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 570, 490));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 570, 480));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Untitled design (3).png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 540));
@@ -217,8 +217,8 @@ public class EnterResult
         if(jfield!=null){
           //    System.out.println(jfield);
           for(Pair<JTextField, JTextField> pair : jfield){
-            JTextField sub = pair.getKey();
-            JTextField mark = pair.getValue();
+            JTextField sub = pair.getKey(); // key
+            JTextField mark = pair.getValue();//value
             // Get the text from the JTextField key
             String subStr = sub.getText();
             String markStr = mark.getText();
@@ -232,37 +232,30 @@ public class EnterResult
         System.out.println(p1);
 
             // Convert p1 to JSON
+//            {
+//            key :"value"
+//        }
             Gson gson = new Gson();
             String json = gson.toJson(p1);
-//                System.out.println(1);
                 Connection con = DBConnect.connect();
                 PreparedStatement ps = con.prepareStatement("insert into result values(?,?)");
                 ps.setString(1,c1.getSelectedItem().toString());
                 ps.setString(2,json);
-//                System.out.println(1);
-
                 int a = ps.executeUpdate();
-//                System.out.println(1);
-
+                
                 if(a==1){
-//                                                    System.out.println(1);
-
-                    JOptionPane.showMessageDialog(null,
-                            "Result declared Successfully");
-                }
-                else{
+                    JOptionPane.showMessageDialog(null, "Result declared Successfully");
+                }else{
                     JOptionPane.showMessageDialog(null,
                             "Some Error ... try again later");
                 }
-        
-        }
-        catch(Exception e){
+        }catch(Exception e){
             System.out.println(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try{
+      try{
 //            enter the number of additional subjects
             num = Integer.parseInt(JOptionPane.showInputDialog("enter the " +
                     "number of subjects you want to add"));
@@ -306,7 +299,7 @@ public class EnterResult
         jPanel2.repaint();
         }catch(Exception e){
             System.out.println(e);
-        }
+        }       
         
     }//GEN-LAST:event_jButton3ActionPerformed
 

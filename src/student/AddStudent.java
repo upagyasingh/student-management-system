@@ -55,11 +55,12 @@ public class AddStudent
     }
     
     public void generateQR(){
-       Map<String,String> data = new HashMap<>();
+       HashMap<String,String> data = new HashMap<>();
        data.put("name",t1.getText());
        data.put("email",t3.getText());
        data.put("rollno",t2.getText());
-       
+       System.out.println(data);
+//       "{name=abc , email=asdf,rollno=123}"
        Gson gson = new Gson();
        String jsonData = gson.toJson(data);//"{"name":"sdf","email"}"
        out = QRCode.from(jsonData).withSize(300,250).to(ImageType.PNG).stream();
@@ -318,7 +319,8 @@ public class AddStudent
     private void subActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subActionPerformed
         try{
             Connection con = DBConnect.connect();
-            PreparedStatement a1 = con.prepareStatement("insert into attendence values(?,'-','-')");
+            PreparedStatement a1 = con.prepareStatement("insert into attendence " +
+                    "values(?,'-','-')");
             a1.setString(1,t2.getText());
             a1.executeUpdate();
 
@@ -331,6 +333,7 @@ public class AddStudent
             ps.setString(3,t3.getText()); // email id
             ps.setString(4,t4.getText()); // class xii
             ps.setString(5,c1.getSelectedItem().toString()); // course
+//            System.out.print(c1.getSelectedItem());
             ps.setString(6,t5.getText()); // aadhar
             ps.setString(7,t6.getText()); // address
             ps.setString(8,t7.getText()); // father

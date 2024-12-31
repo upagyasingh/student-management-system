@@ -24,43 +24,37 @@ public class ViewAttend
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
          String fd = sdf.format(today);
         defaultDate=fd;
-        System.out.print(defaultDate);
+//        System.out.print(defaultDate);
         int sno =1;
          try{
             Connection con = DBConnect.connect();
-            PreparedStatement ps = con.prepareStatement(
-                    "select s1.rollno, s1.name, a1.pa  from studata s1 " +
-                            "join attendence a1 on s1.rollno = a1.rollno "
-            );
+            PreparedStatement ps = con.prepareStatement("select s1.rollno, s1.name, a1.pa  from studata" +
+                    " s1 join attendence a1 on s1.rollno = a1.rollno ");
             ResultSet rs = ps.executeQuery();
-//                            System.out.println(rs.first());
-
             while(rs.next()){
-                //System.out.println(rs.getString("rollno"));
                 String rollno = rs.getString("rollno");
                 String name = rs.getString("name");
                 String present = rs.getString("pa");
                 String absent ="";
                 if(present.equalsIgnoreCase("-")){
-                    ab++;
-                    absent = "-";
+                    ab++;  absent = "-";
                 }
                 if(present.equalsIgnoreCase("absent")){
-                    ab++;
-                    absent = "absent";
+                    ab++; absent = "absent";
                 }
-                else{
-                    pr++;
-                }
-                
+                else{ pr++;  }
                 String sno1 = String.valueOf(sno);
                 String tbData[] ={sno1,rollno,name,present,absent};
                 DefaultTableModel tb1Model=(DefaultTableModel)jTable1.getModel();
                 tb1Model.addRow(tbData);
                 sno++;
             }
+//            for those who have two label
             p.setText(String.valueOf(pr));
             a.setText(String.valueOf(ab));
+//          for those who only have one label
+//                p.setText("Present "+String.valueOf(pr));
+//                a.setText("Absent "+String.valueOf(ab));
            pr=ab=0;
          }catch(Exception e){
              System.out.println(e);
@@ -309,35 +303,18 @@ public class ViewAttend
            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             date1 = (d1.getDate() != null) ? sdf.format(d1.getDate()) : defaultDate;
             date2 = (d2.getDate() != null) ? sdf.format(d2.getDate()) : defaultDate;
-            
               int sno =1;
-              
-          
-            Connection con = DBConnect.connect();
-            
-            PreparedStatement ps = con.prepareStatement(
-                    "select *  from studata s1 " +
-                            "join attendence a1 on s1.rollno = a1.rollno where a1.date " +
-                            "between ? and ?");
-            
-//              PreparedStatement ps = con.prepareStatement(
-//                    "select *  from studata s1 " +
-//                            "join attendence a1 on s1.rollno = a1.rollno where a1.date " +
-//                            "between '2024-07-17' and '2024-07-27' ");
-            
+              Connection con = DBConnect.connect();
+              PreparedStatement ps = con.prepareStatement(
+                    "select  *  from studata s1 " +
+                            "join attendence a1 on s1.rollno = a1.rollno where a1.date between ? and ?");
             ps.setString(1,date1);
             ps.setString(2,date2);
-            
-            
             ResultSet rs = ps.executeQuery();
-//                             System.out.println(rs);
-//                             System.out.println(ps);
-             
-                             
              int count =0;
             while(rs.next()){
                 count++;
-                System.out.println(rs.getString("rollno"));
+//                System.out.println(rs.getString("rollno"));
                 String rollno = rs.getString("rollno");
                 String name = rs.getString("name");
                 String present = rs.getString("pa");
@@ -353,7 +330,7 @@ public class ViewAttend
                 else{
                     pr++;
                 }
-                System.out.println(count);
+//                System.out.println(count);
                 String sno1 = String.valueOf(sno);
                 String tbData[] ={sno1,rollno,name,present,absent};
                 DefaultTableModel tb1Model=(DefaultTableModel)jTable1.getModel();
@@ -385,7 +362,7 @@ public class ViewAttend
              int count =0;
             while(rs.next()){
                 count++;
-                System.out.println(rs.getString("rollno"));
+//                System.out.println(rs.getString("rollno"));
                 String rollno = rs.getString("rollno");
                 String name = rs.getString("name");
                 String present = rs.getString("pa");
@@ -397,7 +374,7 @@ public class ViewAttend
                 else{
                     pr++;
                 }
-                System.out.println(count);
+//                System.out.println(count);
                 String sno1 = String.valueOf(sno);
                 String tbData[] ={sno1,rollno,name,present,absent};
                 DefaultTableModel tb1Model=(DefaultTableModel)jTable1.getModel();

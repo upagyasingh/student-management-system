@@ -95,7 +95,7 @@ public void clearTable(JTable table) {
 }
     
 
-     public ImageIcon resizePic(byte[] pic){
+     public ImageIcon resizePic(byte[] pic){    
         ImageIcon myimg =new ImageIcon(pic);
         Image img = myimg.getImage().getScaledInstance(myImage.getWidth(),myImage.getHeight(),Image.SCALE_SMOOTH);
         return new ImageIcon(img);
@@ -128,6 +128,11 @@ public void clearTable(JTable table) {
         jLabel1.setText("Search By Roll Number");
 
         c3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 0), 2));
+        c3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                c3ActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(255, 102, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -176,6 +181,12 @@ public void clearTable(JTable table) {
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
             }
         });
 
@@ -261,8 +272,8 @@ public void clearTable(JTable table) {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(myImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))))))
@@ -376,7 +387,7 @@ public void clearTable(JTable table) {
             ByteArrayInputStream bis = new ByteArrayInputStream(img);
 //            convert the data into a buffer --> to hold pixel data of image
             BufferedImage bImage = ImageIO.read(bis);
-            File outputFile = new File("D:/stud/images/" + roll + ".png");
+            File outputFile = new File("D:/stud/images/" + roll + ".png"); 
             ImageIO.write(bImage, "png", outputFile);
             JOptionPane.showMessageDialog(null,"Image saved: " + outputFile.getAbsolutePath());
         } catch (Exception e) {
@@ -398,12 +409,20 @@ public void clearTable(JTable table) {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 System.out.print(rollno);
-                byte[] img = rs.getBytes("qr");
+                byte[] img = rs.getBytes("qr"); 
                 myImage.setIcon(resizePic(img));
             }
        }catch(Exception e){}
 
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void c3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_c3ActionPerformed
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1MouseClicked
 
     /**
      * @param args the command line arguments

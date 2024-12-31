@@ -4,6 +4,10 @@
  */
 package dashboard;
 
+import result.*;
+import event.*;
+import fee.*;
+import attendence.*;
 import student.*;
 
 /**
@@ -98,18 +102,33 @@ public class sb
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Delete Student");
         jButton3.setBorder(null);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(21, 141, 70));
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Update Students");
         jButton4.setBorder(null);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setBackground(new java.awt.Color(21, 141, 70));
         jButton5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("View Details");
         jButton5.setBorder(null);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setBackground(new java.awt.Color(21, 141, 70));
         jButton6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -167,12 +186,22 @@ public class sb
         jButton10.setForeground(new java.awt.Color(255, 255, 255));
         jButton10.setText("Update Event");
         jButton10.setBorder(null);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton11.setBackground(new java.awt.Color(21, 141, 70));
         jButton11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton11.setForeground(new java.awt.Color(255, 255, 255));
         jButton11.setText("Add Event");
         jButton11.setBorder(null);
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout evePanelLayout = new javax.swing.GroupLayout(evePanel);
         evePanel.setLayout(evePanelLayout);
@@ -213,12 +242,22 @@ public class sb
         jButton13.setForeground(new java.awt.Color(255, 255, 255));
         jButton13.setText("Student Fee");
         jButton13.setBorder(null);
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jButton14.setBackground(new java.awt.Color(21, 141, 70));
         jButton14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton14.setForeground(new java.awt.Color(255, 255, 255));
         jButton14.setText("Fee Structure");
         jButton14.setBorder(null);
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout feePanelLayout = new javax.swing.GroupLayout(feePanel);
         feePanel.setLayout(feePanelLayout);
@@ -259,12 +298,22 @@ public class sb
         jButton15.setForeground(new java.awt.Color(255, 255, 255));
         jButton15.setText("View Attendence");
         jButton15.setBorder(null);
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         jButton16.setBackground(new java.awt.Color(21, 141, 70));
         jButton16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton16.setForeground(new java.awt.Color(255, 255, 255));
         jButton16.setText("Mark Attendence");
         jButton16.setBorder(null);
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout attPanelLayout = new javax.swing.GroupLayout(attPanel);
         attPanel.setLayout(attPanelLayout);
@@ -305,12 +354,22 @@ public class sb
         jButton19.setForeground(new java.awt.Color(255, 255, 255));
         jButton19.setText("Generate Result");
         jButton19.setBorder(null);
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
 
         jButton20.setBackground(new java.awt.Color(21, 141, 70));
         jButton20.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton20.setForeground(new java.awt.Color(255, 255, 255));
         jButton20.setText("Enter Result");
         jButton20.setBorder(null);
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout resPanelLayout = new javax.swing.GroupLayout(resPanel);
         resPanel.setLayout(resPanelLayout);
@@ -351,18 +410,33 @@ public class sb
         jButton23.setForeground(new java.awt.Color(255, 255, 255));
         jButton23.setText("Web Browser");
         jButton23.setBorder(null);
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
 
         jButton24.setBackground(new java.awt.Color(21, 141, 70));
         jButton24.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton24.setForeground(new java.awt.Color(255, 255, 255));
         jButton24.setText("Calculator");
         jButton24.setBorder(null);
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
 
         jButton25.setBackground(new java.awt.Color(21, 141, 70));
         jButton25.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton25.setForeground(new java.awt.Color(255, 255, 255));
         jButton25.setText("Notepad");
         jButton25.setBorder(null);
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout utiPanelLayout = new javax.swing.GroupLayout(utiPanel);
         utiPanel.setLayout(utiPanelLayout);
@@ -526,6 +600,79 @@ public class sb
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         new AddStudent().setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        try {
+                Runtime.getRuntime().exec("notepad.exe");
+            } catch (Exception e) {}
+    }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+       try {
+                Runtime.getRuntime().exec("calc.exe");
+            } catch (Exception e) {}
+              
+    }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        try {
+            String chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+            Runtime.getRuntime().exec(chromePath);
+
+            } catch (Exception e) {
+            }
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        new ViewStudent().setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        new UpdateStudent().setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        new DeleteStudent().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+               new EnterResult().setVisible(true);
+
+    }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        new GenerateResult().setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+                new FeeStructure().setVisible(true);
+
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+                new StudentFee().setVisible(true);
+
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+                new MarkAttend().setVisible(true);
+
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+                new ViewAttend().setVisible(true);
+
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        new AddEvent().setVisible(true);
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        new EditEvent().setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments

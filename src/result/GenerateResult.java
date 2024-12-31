@@ -6,7 +6,10 @@ package result;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import java.sql.*;
+import java.awt.Graphics;
+import java.awt.PrintJob;
+import java.awt.Toolkit;
+import java.sql.*;  
 import java.util.ArrayList;
 import org.bridj.util.Pair;
 import studentmanagement.DBConnect;
@@ -64,6 +67,11 @@ public class GenerateResult
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 153));
         jButton1.setText("Print");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, 180, 50));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -92,32 +100,36 @@ public class GenerateResult
     }// </editor-fold>//GEN-END:initComponents
 
     private void c1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c1ActionPerformed
-     try {
+  try {
         Connection con = DBConnect.connect();
-        PreparedStatement ps = con.prepareStatement("select * from result where rollno = ?");
+        PreparedStatement ps = con.prepareStatement("select * from result where" +
+                " rollno = ?");
         ps.setString(1, c1.getSelectedItem().toString());
         
         ResultSet rs = ps.executeQuery();
+        
         if (rs.next()) {
-            String json = rs.getString("sub");
+            String json = rs.getString("sub"); //[]
 
             // Convert JSON string back to ArrayList of Pairs
-            Gson gson = new Gson();
-            java.lang.reflect.Type listType = new TypeToken<ArrayList<Pair<String, Integer>>>(){}.getType();
+            Gson gson = new Gson(); 
+            java.lang.reflect.Type listType = new TypeToken<ArrayList<Pair<String, Integer>>>
+        (){}.getType();
             ArrayList<Pair<String, Integer>> p1 = gson.fromJson(json, listType);
 
             // Remove all existing components from jPanel2
             jPanel2.removeAll();
 
             // Use p1 as needed
+            
             x = 0;
             for (Pair<String, Integer> pair : p1) {
                 x++;
                 javax.swing.JLabel newj = new javax.swing.JLabel();
-                newj.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-                newj.setForeground(new java.awt.Color(0, 0, 102));
+//                newj.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+//                newj.setForeground(new java.awt.Color(0, 0, 102));
                 newj.setOpaque(true);
-                newj.setText(pair.getKey() + "                                               " + pair.getValue());
+                newj.setText(pair.getKey() + "                                        " + pair.getValue());
                 jPanel2.add(newj);
             }
             
@@ -130,6 +142,15 @@ public class GenerateResult
         e.printStackTrace();
     }
     }//GEN-LAST:event_c1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       Toolkit tkp = jPanel2.getToolkit();
+       PrintJob pjp = tkp.getPrintJob(this, null, null);
+       Graphics g = pjp.getGraphics();
+       jPanel2.print(g);
+       g.dispose();
+       pjp.end();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -25,20 +25,13 @@ import java.util.concurrent.*;
 import javax.swing.*;
 import studentmanagement.DBConnect;
 
-/**
- *
- * @author upagy
- */
 public class MarkAttend
         extends javax.swing.JFrame implements Runnable , ThreadFactory{
         private WebcamPanel p1 = null;
         private Webcam w1 = null;
         private ExecutorService  e = Executors.newSingleThreadExecutor(this);    
-//        private boolean running = true;
         private boolean webcamOpen = true;
-    /**
-     * Creates new form MarkAttend
-     */
+ 
     public MarkAttend() {
         initComponents();
         initWebcam();
@@ -52,17 +45,23 @@ public class MarkAttend
     }
     
      private void initWebcam() {
+//         get the webcam object from the camera
         w1 = Webcam.getDefault();
+//        checking if there is webcam or not
         if(w1 != null){
+//            returns the visible current size that can be captured in pixels
             Dimension[] reso = w1.getViewSizes();
+//            get the length
             Dimension maxRes = reso[reso.length - 1];
-            
+//            if webcam was open beforehand then close it
             if(w1.isOpen()){
                 w1.close();
             }
+//            set the size of webcam
             w1.setViewSize(new Dimension(640,480));
+//            and then open it
             w1.open();
-            
+//            create a panel for the webcam and set its size
             p1 = new WebcamPanel(w1);
             p1.setSize(maxRes);
             p1.setFPSDisplayed(true);
@@ -363,10 +362,8 @@ public class MarkAttend
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel webPanel;
     // End of variables declaration//GEN-END:variables
-
-    
-    Map<String,String> resultMap = new HashMap<String,String>();
-    
+   
+Map<String,String> resultMap = new HashMap<String,String>();    
 @Override
 public void run() {
     do {
@@ -379,14 +376,14 @@ public void run() {
         try {
             Result res = null;
             BufferedImage image = null;
-
+            //stores the data in pixel format
             if (w1.isOpen()) {
                 image = w1.getImage();
                 if (image == null) {
                     System.out.println("No image captured from webcam");
                     continue;
                 }
-
+                
                 LuminanceSource source = new BufferedImageLuminanceSource(image);
                 BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 
@@ -396,7 +393,7 @@ public void run() {
                         System.out.println("QR Code Text: " + res.getText());
 //                        jLabel4.setText(res.getText());
                        resultMap = convertJsonToMap(res.getText());
-                       System.out.println(resultMap.get("rollno"));
+//                       System.out.println(resultMap.get("rollno"));
                        jLabel6.setText(resultMap.get("name"));
                        jLabel7.setText(resultMap.get("rollno"));
                         
@@ -453,7 +450,7 @@ public void run() {
      
                     if(rs.getString("pa").equalsIgnoreCase("-") ){
 //                        upate the attendence of that roll number
-    System.out.println("pa = - ");
+//    System.out.println("pa = - ");
                            PreparedStatement a1 = con.prepareStatement("update attendence set date = ? , pa = ? where rollno = ?");
                            a1.setString(1,jLabel3.getText());
                            a1.setString(2,"present");
@@ -470,7 +467,7 @@ public void run() {
                             }
                     }
                     else if(!rs.getString("date").equalsIgnoreCase(jLabel3.getText()) ){
-                    System.out.println("pa = -       "+rs.getString("date"));
+//                    System.out.println("pa = -       "+rs.getString("date"));
 
                              String qry = "insert into attendence values(?,?,?)";
                                 PreparedStatement ps = con.prepareStatement(qry);
@@ -494,23 +491,6 @@ public void run() {
                        "  is already marked present");
                     }
                }
-            
-//            else{
-//                String qry = "insert into attendence values(?,?,?)";
-//                PreparedStatement ps = con.prepareStatement(qry);
-//                ps.setString(1,rollno);
-//                ps.setString(2,jLabel3.getText());
-//                ps.setString(3,"present");
-//
-//                int a = ps.executeUpdate();
-//                if(a==1){
-//                    JOptionPane.showMessageDialog(null,
-//                            resultMap.get("name")+" is marked present ");
-//                }
-//                else{
-//                    JOptionPane.showMessageDialog(null,"Some Error");
-//                }
-//            }
         }
         catch(Exception e){
             System.out.print(e);

@@ -4,6 +4,7 @@
  */
 package studentmanagement;
 //import dashboard.DashBoard1;
+import dashboard.DashBoard1;
 import java.sql.*;
 import javax.swing.JOptionPane;
 /**
@@ -186,7 +187,7 @@ public class Login
           ResultSet rs  = ps.executeQuery();
           if(rs.next()){
               dispose();
-              //new DashBoard1(rs.getString(1)).setVisible(true);
+              new DashBoard1(rs.getString(1)).setVisible(true);
           }
           else{
               JOptionPane.showMessageDialog(null,"Wrong ID or Password");
