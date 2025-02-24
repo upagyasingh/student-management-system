@@ -284,29 +284,29 @@ public class AddStudent
     }// </editor-fold>//GEN-END:initComponents
 
     private void choiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choiceActionPerformed
-        // to generate  a pop-up box that will allow to select a file
+//     to generate  a pop-up box that will allow to select a file
         JFileChooser file = new JFileChooser();
-//        to set the first folder to appear 
+//     to set the first folder to appear 
         file.setCurrentDirectory(new File(System.getProperty("user.home")));
 //     to select the suitable file type
         FileNameExtensionFilter filefilter = new FileNameExtensionFilter(".Images", "jpg", "png", "jpeg", "gif");
-//       to add the suitable file extension to the JFileChooser object named file
+//     to add the suitable file extension to the JFileChooser object named file
         file.addChoosableFileFilter(filefilter);
-//        to get the state if user have selected a file or not
-//         if an image is selected then filestate = 1  ortherwise filestate = 0
+//     to get the state if user have selected a file or not
+//      if an image is selected then filestate = 1  ortherwise filestate = 0
         int filestate = file.showSaveDialog(null);
-//       conditional statements
+//     conditional statements
         if (filestate == JFileChooser.APPROVE_OPTION) {
-//            if an image is selected then get the path of folder
-            File sf = file.getSelectedFile();
-//            get the absolute path i.e starting from the drive eg: C:/Downloads.... .. the complete path
-            String path = sf.getAbsolutePath();
-//          send the image/path to resizePic method to adjust the size of image selected acc to the label
-//          then set the modified image into the label
-            myImage.setIcon(resizePic(path));
-            imgPath = path;
+//      if an image is selected then get the path of folder
+         File sf = file.getSelectedFile();
+//      get the absolute path i.e starting from the drive eg: C:/Downloads.... .. the complete path
+         String path = sf.getAbsolutePath();
+//      send the image/path to resizePic method to adjust the size of image selected acc to the label
+//      then set the modified image into the label
+         myImage.setIcon(resizePic(path));
+         imgPath = path;
         } 
-//        part of code to run if no image is selected by the user
+//      part of code to run if no image is selected by the user
         else if (filestate == JFileChooser.CANCEL_OPTION) {
             JOptionPane.showConfirmDialog(null, "NO IMAGE SELECTED");
         }

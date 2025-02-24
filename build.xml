@@ -70,4 +70,13 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <target name="jar" depends="compile">
+    <mkdir dir="dist"/>
+    <jar destfile="dist/StudentManagement.jar" basedir="${build.classes.dir}">
+        <manifest>
+            <attribute name="Main-Class" value="studentmanagement.StudentManagement"/>
+        </manifest>
+    </jar>
+</target>
+
 </project>
