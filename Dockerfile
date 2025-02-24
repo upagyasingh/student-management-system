@@ -1,11 +1,14 @@
-# Use the official OpenJDK image
-FROM openjdk:17-jdk
+# Use Java 20 as base image
+FROM openjdk:20-jdk
 
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy the built JAR file into the container
-COPY dist/StudentManagement.jar /app/StudentManagement.jar
+# Copy JAR file
+COPY dist/StudentManagement.jar StudentManagement.jar
 
-# Run the JAR file
+# Expose port (if applicable)
+EXPOSE 8080
+
+# Run the application
 CMD ["java", "-jar", "StudentManagement.jar"]
